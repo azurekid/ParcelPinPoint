@@ -203,6 +203,38 @@ The server will start on port 3000 by default. You can change this by setting th
 PORT=8080 npm start
 ```
 
+## Deployment
+
+### Azure Deployment
+
+This application requires a **Node.js runtime** and **cannot** run on Azure Static Web Apps backed by storage accounts. You must use **Azure App Service** or a containerized solution.
+
+**Recommended: Azure App Service**
+
+Quick deployment via Azure CLI:
+```bash
+# Create and deploy to Azure App Service
+az webapp up --name parcelpinpoint-app --runtime "NODE:18-lts" --sku B1
+```
+
+For detailed deployment instructions, including:
+- Azure App Service (recommended)
+- Azure Container Instances
+- Docker deployment
+- GitHub Actions CI/CD
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for complete deployment guide.
+
+### Docker Deployment
+
+```bash
+# Build the image
+docker build -t parcelpinpoint .
+
+# Run the container
+docker run -p 3000:3000 parcelpinpoint
+```
+
 ## Future Enhancements
 
 - Integration with real-time APIs from delivery services
