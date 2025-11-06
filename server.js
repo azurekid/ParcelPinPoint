@@ -242,7 +242,10 @@ app.get('/api/locations', (req, res) => {
   
   // Limit results
   if (limit) {
-    filteredLocations = filteredLocations.slice(0, parseInt(limit));
+    const limitNum = parseInt(limit, 10);
+    if (!isNaN(limitNum) && limitNum > 0 && limitNum <= 100) {
+      filteredLocations = filteredLocations.slice(0, limitNum);
+    }
   }
   
   res.json({
@@ -263,7 +266,16 @@ app.get('/api/services', (req, res) => {
 
 // Get location by ID
 app.get('/api/locations/:id', (req, res) => {
-  const location = locations.find(loc => loc.id === parseInt(req.params.id));
+  const id = parseInt(req.params.id, 10);
+  
+  if (isNaN(id) || id < 1) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid location ID'
+    });
+  }
+  
+  const location = locations.find(loc => loc.id === id);
   
   if (location) {
     res.json({

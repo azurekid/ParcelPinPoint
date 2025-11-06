@@ -1,7 +1,7 @@
 {
   "name": "parcelpinpoint",
   "version": "1.0.0",
-  "description": "This repository contains a web application to find the parel pickup and drop-off locations",
+  "description": "This repository contains a web application to find the parcel pickup and drop-off locations",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
