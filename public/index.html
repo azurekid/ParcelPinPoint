@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParcelPinPoint - Find Your Nearest Pickup Point</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📦 ParcelPinPoint</h1>
+            <p class="subtitle">Find the nearest pickup and drop-off points for parcel delivery services in The Netherlands</p>
+        </header>
+
+        <main>
+            <section class="search-section">
+                <h2>Search for Locations</h2>
+                
+                <div class="search-form">
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code:</label>
+                        <input 
+                            type="text" 
+                            id="postalCode" 
+                            placeholder="e.g., 1012JM" 
+                            maxlength="7"
+                        >
+                        <small>Enter a Dutch postal code (e.g., 1012JM, 3011PL)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Delivery Service:</label>
+                        <select id="service">
+                            <option value="all">All Services</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Location Type:</label>
+                        <select id="type">
+                            <option value="">All Types</option>
+                            <option value="pickup">Pickup Only</option>
+                            <option value="both">Pickup & Drop-off</option>
+                        </select>
+                    </div>
+
+                    <button id="searchBtn" class="btn-primary">Search Locations</button>
+                </div>
+            </section>
+
+            <section class="results-section">
+                <div class="results-header">
+                    <h2>Results</h2>
+                    <span id="resultCount" class="result-count"></span>
+                </div>
+                
+                <div id="loadingSpinner" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Loading locations...</p>
+                </div>
+                
+                <div id="results" class="results-grid"></div>
+                
+                <div id="noResults" class="no-results hidden">
+                    <p>No locations found. Try adjusting your search criteria.</p>
+                </div>
+            </section>
+
+            <section class="api-section">
+                <h2>API Documentation</h2>
+                <div class="api-docs">
+                    <h3>Available Endpoints</h3>
+                    
+                    <div class="endpoint">
+                        <h4>GET /api/locations</h4>
+                        <p>Retrieve locations with optional filters</p>
+                        <div class="params">
+                            <strong>Query Parameters:</strong>
+                            <ul>
+                                <li><code>postalCode</code> - Filter by postal code (e.g., 1012JM)</li>
+                                <li><code>service</code> - Filter by service (PostNL, DHL, DPD, GLS, UPS)</li>
+                                <li><code>type</code> - Filter by type (pickup, both)</li>
+                                <li><code>limit</code> - Limit number of results</li>
+                            </ul>
+                        </div>
+                        <div class="example">
+                            <strong>Example:</strong>
+                            <code class="code-block">GET /api/locations?postalCode=1012JM&service=PostNL&limit=5</code>
+                        </div>
+                    </div>
+
+                    <div class="endpoint">
+                        <h4>GET /api/services</h4>
+                        <p>Get list of available delivery services</p>
+                        <div class="example">
+                            <strong>Example:</strong>
+                            <code class="code-block">GET /api/services</code>
+                        </div>
+                    </div>
+
+                    <div class="endpoint">
+                        <h4>GET /api/locations/:id</h4>
+                        <p>Get details of a specific location by ID</p>
+                        <div class="example">
+                            <strong>Example:</strong>
+                            <code class="code-block">GET /api/locations/1</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 ParcelPinPoint - Find your nearest parcel service location</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
